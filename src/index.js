@@ -3,11 +3,16 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-
+const Prueba = (props) =>{
+  return <h1>{props.contadorInicial}</h1>
+}
+let contador = 0
+contador = contador++
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <App />
+    <App/>
+    <Prueba contadorInicial={contador}/>
   </React.StrictMode>
 );
 
