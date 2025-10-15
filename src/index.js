@@ -3,11 +3,27 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { useState } from 'react';
+function Prueba(props) {
+  const [contador, updateContador] = useState(0);
+  //const contador = useState(0)
+  //const contadorValue =  contador[0];
+  //const updateContador =  contador[1];
+  setInterval(()=>{
+    updateContador(contador + 1)
+  },2000)
 
+  return (
+    <div className="App">
+     <h1>{contador}</h1>
+    </div>
+  );
+}
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <App />
+    <Prueba/>
   </React.StrictMode>
 );
 
