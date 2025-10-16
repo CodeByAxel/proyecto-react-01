@@ -1,23 +1,49 @@
-import React from 'react';
+import React, {} from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { useState } from 'react';
-function Prueba(props) {
-  const [contador, updateContador] = useState(0);
-  //const contador = useState(0)
-  //const contadorValue =  contador[0];
-  //const updateContador =  contador[1];
-  setInterval(()=>{
-    updateContador(contador + 1)
-  },2000)
+
+
+const Prueba = (props) => {
+  
+
+  const[counters, setCounters] = useState({
+    left:0,
+    right:0,
+    clicks: 0,
+    mensaje:"mensaje en el estado"
+  })
+  const handleClickLeft = () =>{
+    const newSetCounters = {
+      ...counters,
+      left:counters.left + 1,
+      clicks:counters.clicks + 1 
+    }
+    setCounters(newSetCounters)
+  }
+  const handleClickRight = () =>{
+    const newSetCounters1 = {
+      ...counters,
+      right:counters.right + 1,
+      clicks:counters.clicks + 1 
+    }
+    setCounters(newSetCounters1)
+  }
 
   return (
-    <div className="App">
-     <h1>{contador}</h1>
+    <div>
+      {counters.left}
+      <button onClick={handleClickLeft}>left</button>
+      <button onClick={handleClickRight}>right</button>
+      {counters.right}
+      <p>Clicks totales: {counters.clicks}</p>
+      <p>{counters.mensaje}</p>
     </div>
-  );
+  )
+    
+  ;
 }
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
