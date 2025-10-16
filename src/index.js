@@ -12,24 +12,28 @@ const Prueba = (props) => {
   const[counters, setCounters] = useState({
     left:0,
     right:0,
-    clicks: 0,
     mensaje:"mensaje en el estado"
   })
+  const [click, setClicks] = useState([])
   const handleClickLeft = () =>{
     const newSetCounters = {
       ...counters,
-      left:counters.left + 1,
-      clicks:counters.clicks + 1 
+      left:counters.left + 1 
     }
     setCounters(newSetCounters)
+    setClicks(prevClicks =>[...prevClicks, "L"]
+    )
   }
   const handleClickRight = () =>{
     const newSetCounters1 = {
       ...counters,
-      right:counters.right + 1,
-      clicks:counters.clicks + 1 
+      right:counters.right + 1 
+    
     }
     setCounters(newSetCounters1)
+    setClicks(prevClicks =>[...prevClicks, "R"]
+    )
+    
   }
 
   return (
@@ -38,8 +42,9 @@ const Prueba = (props) => {
       <button onClick={handleClickLeft}>left</button>
       <button onClick={handleClickRight}>right</button>
       {counters.right}
-      <p>Clicks totales: {counters.clicks}</p>
-      <p>{counters.mensaje}</p>
+      <p>Clicks totales: {click.length}</p>
+      <p>{click.join(", ")}</p>
+      <p></p>
     </div>
   )
     
