@@ -1,31 +1,57 @@
-
+import { Note } from './Note';
+import { useEffect, useState } from 'react';
 import './App.css';
-const notes = [
-  {
-    id: 1,
-    content: 'HTML is easy',
-    important: true
-  },
-  {
-    id: 2,
-    content: 'Browser can execute only JavaScript',
-    important: false
-  },
-  {
-    id: 3,
-    content: 'GET and POST are the most important methods of HTTP protocol',
-    important: true
+export default function App() {
+ const [notes, setNotes] = useState([]);
+ const [newNote, setNewNote] = useState("")
+ const [loading, setLoading] = useState(false)
+ useEffect(()=>{
+  console.log("useffect");
+  setLoading(true)
+  setTimeout(()=>{
+    fetch("https://jsonplaceholder.typicode.com/posts")
+  .then(response => response.json())
+  .then(json => {
+    setNotes(json);
+    setLoading(false)
+  })
+  }, 3000)
+  
+ }, [])
+ const handleChange = (e) =>{
+  setNewNote(e.target.value);
+ }
+ const handleSubmit = (e) =>{
+  e.preventDefault()
+  const noteToAddToState = {
+    id: notes.length + 1,
+    title: newNote,
+    body: newNote
+    
+    
   }
-]
-function App(props) {
+  console.log(noteToAddToState);
+  setNotes([...notes, noteToAddToState])
+  setNewNote("")
+ }
   return (
-    <div className="App">
-     <h1>Clase 4 del bootcamp</h1>
-     <div>{notes.map((note)=>{
-      return <p>{note.id} {note.content}</p>;
-     })}</div>
+    <div>
+      <h1>Notes</h1>
+      {loading ? "cargando..." : "" }
+      
+      <ol>
+        {notes
+        .map((note)=>(
+          <Note key={note.id}{...note}/>
+        ))
+        }
+      </ol>
+      <form onSubmit={handleSubmit}>
+        <input type='text' onChange={handleChange} value={newNote}></input>
+        <button>Crear nota</button>
+      </form>
     </div>
   );
 }
 
-export default App;
+
