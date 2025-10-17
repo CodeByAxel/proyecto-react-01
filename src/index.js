@@ -3,58 +3,31 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import { useState } from 'react';
 
 
-const Prueba = (props) => {
-  
-
-  const[counters, setCounters] = useState({
-    left:0,
-    right:0,
-    mensaje:"mensaje en el estado"
-  })
-  const [click, setClicks] = useState([])
-  const handleClickLeft = () =>{
-    const newSetCounters = {
-      ...counters,
-      left:counters.left + 1 
-    }
-    setCounters(newSetCounters)
-    setClicks(prevClicks =>[...prevClicks, "L"]
-    )
+const notes = [
+  {
+    id: 1,
+    content: 'HTML is easy',
+    important: true
+  },
+  {
+    id: 2,
+    content: 'Browser can execute only JavaScript',
+    important: false
+  },
+  {
+    id: 3,
+    content: 'GET and POST are the most important methods of HTTP protocol',
+    important: true
   }
-  const handleClickRight = () =>{
-    const newSetCounters1 = {
-      ...counters,
-      right:counters.right + 1 
-    
-    }
-    setCounters(newSetCounters1)
-    setClicks(prevClicks =>[...prevClicks, "R"]
-    )
-    
-  }
+]
 
-  return (
-    <div>
-      {counters.left}
-      <button onClick={handleClickLeft}>left</button>
-      <button onClick={handleClickRight}>right</button>
-      {counters.right}
-      <p>Clicks totales: {click.length}</p>
-      <p>{click.join(", ")}</p>
-      <p></p>
-    </div>
-  )
-    
-  ;
-}
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <App />
-    <Prueba/>
+    <App notes={notes} />
+
   </React.StrictMode>
 );
 
